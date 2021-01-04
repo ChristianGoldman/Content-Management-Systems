@@ -1,0 +1,25 @@
+{
+  "name": "content-management-systems",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChristianGoldman/Content-Management-Systems.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChristianGoldman/Content-Management-Systems/issues"
+  },
+  "homepage": "https://github.com/ChristianGoldman/Content-Management-Systems#readme",
+  "dependencies": {
+    "console-table": "^0.1.2",
+    "inquirer": "^7.3.3",
+    "mysql": "^2.18.1",
+    "node": "^15.4.0"
+  }
+}
