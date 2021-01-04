@@ -114,6 +114,16 @@ function addEmployee() {
     },
   ])
   .then(function (){
+    let roleArray = [];
+    let managerArray = [];
+  
+    connection.query("SELECT id, title FROM role", function (error, results, fields) {
+      if (error) throw error;
+      for(let i = 0; i < results.length; i++){
+        roleArray.push(results[i].title);
+        console.log(roleArray);
+      };
+    });
     askAgain();
   })
 };
@@ -203,14 +213,16 @@ function removeEmployee() {
         for (i=0; i < results.length; i++){
           if (res.deleted === results[i].employee){
               removedEmp = results[i].id;
+              console.log(removedEmp);
+              break;  
             };
-            console.log(removedEmp);
         };
         connection.query(`DELETE FROM employee WHERE id=${removedEmp};`, function(err, res) {
           if(err) return err;
-          console.log(`\n EMPLOYEE '${res.employee}' DELETED...\n `);
+          console.log(`\n EMPLOYEE '${removedEmp}' DELETED...\n `);
         });
         askAgain();
+        
       } else {
         console.log('Employee was not removed!');
         askAgain();
@@ -218,6 +230,6 @@ function removeEmployee() {
 
     });
   });
-}
+};
 
 questions();
