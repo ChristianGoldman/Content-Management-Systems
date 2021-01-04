@@ -177,7 +177,7 @@ function viewRoles() {
 
 function removeEmployee() {
   let employeeArray = [];
-  connection.query("SELECT first_name, last_name, role_id, concat(first_name, ' ', last_name, ' ', 'Role ID ', role_id) AS employee FROM employee", function (error, results, fields) {
+  connection.query("SELECT id, first_name, last_name, role_id, concat(first_name, ' ', last_name, ' ', 'Role ID ', role_id) AS employee FROM employee", function (error, results, fields) {
     if (error) throw error;
     for(let i = 0; i < results.length; i++){
       employeeArray.push(results[i].employee);
@@ -202,7 +202,7 @@ function removeEmployee() {
         let removedEmp;
         for (i=0; i < results.length; i++){
           if (res.deleted === results[i].employee){
-              removedEmp = results[i].employee;
+              removedEmp = results[i].id;
             };
             console.log(removedEmp);
         };
