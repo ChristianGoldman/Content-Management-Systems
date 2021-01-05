@@ -87,45 +87,57 @@ function addRoles() {
   ])
   .then(function (){
     askAgain();
-  })
+  });
 };
 
 function addEmployee() {
-  inquirer.prompt([
-    {
-      type: "input",
-      name: "first",
-      message: "What is the first name of the employee?",
-    },
-    {
-      type: "input",
-      name: "last",
-      message: "What is the last name of the employee?",
-    },
-    {
-      type: "input",
-      name: "roleId",
-      message: "What role does the employee have?",
-    },
-    {
-      type: "input",
-      name: "managerId",
-      message: "What manager does this employee belong under?",
-    },
-  ])
-  .then(function (){
-    let roleArray = [];
-    let managerArray = [];
+  let roleArray = [];
+  let managerArray = [];
   
-    connection.query("SELECT id, title FROM role", function (error, results, fields) {
-      if (error) throw error;
-      for(let i = 0; i < results.length; i++){
-        roleArray.push(results[i].title);
-        console.log(roleArray);
-      };
+  connection.query("SELECT id, title FROM role", function (error, results, fields) {
+    if (error) throw error;
+    for(let i = 0; i < results.length; i++){
+      roleArray.push({"name":results[i].title, "value":results[i].id});
+    };
+  });
+
+  connection.query("SELECT id, concat(first_name, ' ', last_name) AS Manager FROM employee WHERE manager_id IS NULL", function (error, results, fields) {
+    if (error) throw error;
+    for(let i = 0; i < results.length; i++){
+      managerArray.push({"name":results[i].Manager, "value":results[i].id});
+    };
+  });
+    inquirer.prompt([
+      {
+        type: "input",
+        name: "first",
+        message: "What is the first name of the employee?",
+      },
+      {
+        type: "input",
+        name: "last",
+        message: "What is the last name of the employee?",
+      },
+      {
+        type: "list",
+        name: "roleId",
+        message: "What role does the employee have?",
+        choices: roleArray,
+      },
+      {
+        type: "list",
+        name: "managerId",
+        message: "What manager does this employee belong under?",
+        choices: managerArray,
+      },
+    ])
+    .then(function(res){
+      connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id"), VALUES (res.first, res.last, roleArray, managerArray),
+      (err,res) => {
+        if (err) throw err;
+        console.log(res.first, res.last, roleArray, managerArray);
+      }
     });
-    askAgain();
-  })
 };
 
 function addDepartment() {
@@ -138,6 +150,7 @@ function addDepartment() {
       },
   ])
   .then(function (){
+    
     askAgain();
   })
 };
