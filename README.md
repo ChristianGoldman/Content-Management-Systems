@@ -17,9 +17,13 @@
 2. Change directory to the cloned repo
 3. Navigate to the Content-Management-Systems folder
 4. In the command line run "npm install"
-5. In the commmand line run "node app.js"
-6. Select a inquirer prompt to do what you want!
-7. You should see a command line application similar to this
+5. In app.js change the MySQL connection information to your own personal info
+6. Open MySQL workbench
+7. Copy and paste Both files db.sql and seed.sql into your MySQL workbench
+8. run those files to seed the created database
+9. In the commmand line run "node app.js"
+10. Select a inquirer prompt, to do what you want!
+11. You should see a command line application similar to this
 ![About Me](assets/cms.png)
 ## Credits ##
 * Cwerness gitlab
