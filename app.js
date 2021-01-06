@@ -332,7 +332,7 @@ function updateEmployee() {
                 type: "list",
                 name: "change",
                 message: "What would you like to update?",
-                choices: ["Role", "Manager", "Department", "Salary"],
+                choices: ["Role"],
               },
             ])
             .then(function (res) {
