@@ -353,17 +353,17 @@ function updateEmployee() {
                     },
                   ])
                   .then(function (response) {
+                    console.log(response);
                     connection.query(
-                      "UPDATE employee SET WHERE ?",
-                      {
-                        first_name: results.first_name,
-                      },
-                      {
-                        role_id: res.role,
-                      },
-                      function (err) {
+                      "UPDATE employee SET role_id =? WHERE id=?",
+                      [
+                        response.role, response.employee
+                      ],
+                      function (err, data) {
+                        console.log(data);
+                        console.log(response + "\n \n hey how are you doing?");
                         if (err) throw err;
-                        console.log(response);
+                        
                       }
                     );
                   });
